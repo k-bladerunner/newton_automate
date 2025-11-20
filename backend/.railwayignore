@@ -1,0 +1,14 @@
+# Railway ignore file
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+*.db
+.env.local
+.env.development
+*.log
+.DS_Store
+.pytest_cache

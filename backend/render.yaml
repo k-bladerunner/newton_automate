@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: newton-autopilot-backend
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install -r requirements.txt && playwright install chromium && playwright install-deps"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.7
+      - key: NEWTON_EMAIL
+        sync: false
+      - key: NEWTON_PASSWORD
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: API_HOST
+        value: 0.0.0.0
+      - key: API_PORT
+        value: $PORT
+      - key: DATABASE_URL
+        value: sqlite:///./data/newton_autopilot.db
