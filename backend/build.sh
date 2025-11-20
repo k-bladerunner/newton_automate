@@ -4,10 +4,10 @@
 echo "Installing Python dependencies..."
 pip install -r requirements.txt
 
-echo "Installing Playwright..."
-playwright install chromium
-
-echo "Installing Playwright dependencies..."
-playwright install-deps chromium
+echo "Installing Playwright browsers..."
+PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium --with-deps || {
+    echo "Playwright installation with deps failed, trying without deps..."
+    PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium
+}
 
 echo "Build complete!"
